@@ -1,7 +1,7 @@
 function Center() {
   return (
-    <div className="text-white">
-      Center component
+    <div className="flex flex-grow text-white">
+      Center componentsadfasd
     </div>
   )
 }
