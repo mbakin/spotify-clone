@@ -1,9 +1,22 @@
+import { useEffect } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import spotifyApi from '../lib/spotify';
+
 function useSpotify() {
-  return (
-    <div>
-      <h1>Spotify Custom hook</h1>
-    </div>
-  )
+
+  const { data : session, status } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      if (session.error === "RefrehAccessTokenError") {
+        signIn();
+      }
+
+      spotifyApi.setAccessToken(session.user.accessToken);
+    }
+  }, [session]);
+
+  return spotifyApi;
 }
 
 export default useSpotify
