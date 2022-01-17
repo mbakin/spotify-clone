@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const playlistState = atom({
-  key: 'playlistState',
+export const playlistIdState = atom({
+  key: 'playlistIdState',
   default : '7uNMaEENBSW9jJQLftNkfE',
 });
