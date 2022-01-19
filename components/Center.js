@@ -4,27 +4,39 @@ import { ChevronDownIcon } from "@heroicons/react/outline";
 import { shuffle } from "lodash";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
+import useSpotify from '../hook/useSpotify';
 
 const colors = [
-	'from-indigo-500',
-	'from-yellow-500',
-	'from-purple-500',
-	'from-red-500',
-	'from-green-500',
-	'from-blue-500',
-	'from-pink-500',
+  "from-indigo-500",
+  "from-yellow-500",
+  "from-purple-500",
+  "from-red-500",
+  "from-green-500",
+  "from-blue-500",
+  "from-pink-500",
 ];
-
 
 function Center() {
   const { data: session } = useSession();
+  const spotifyApi = useSpotify();
   const [color, setColor] = useState(null);
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
 
   useEffect(() => {
     setColor(shuffle(colors)[0]);
-  },[playlistId]);
+  }, [playlistId]);
+
+  useEffect(() => {
+    spotifyApi
+      .getPlaylist(playlistId)
+      .then((data) => {
+        setPlaylist(data.body);
+      })
+      .catch((err) => console.log(err));
+  }, [spotifyApi, playlistId]);
+
+  console.log(playlist);
 
   return (
     <div className="flex-grow">
