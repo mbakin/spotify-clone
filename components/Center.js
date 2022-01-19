@@ -41,7 +41,8 @@ function Center() {
   return (
     <div className="flex-grow">
       <header className="absolute top-5 right-8">
-        <div className="flex items-center bg-red-200 space-x-3 p-1 pr-2 pl-4 opacity-90 hover:opacity-80 cursor-pointer rounded-full">
+        <div className="flex items-center bg-black text-white space-x-3 p-1 pr-2  opacity-90 hover:opacity-80 cursor-pointer rounded-full">
+          <img className="rounded-full w-10 h-10" src={session?.user.image} url="user-avatar" />
           <h2>{session?.user.name}</h2>
           <ChevronDownIcon className="w-5 h-5" />
         </div>
